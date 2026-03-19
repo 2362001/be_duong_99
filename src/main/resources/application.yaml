@@ -1,5 +1,5 @@
 server:
-    port: 7000
+  port: 7000
 
 spring:
   application:
@@ -17,3 +17,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+jwt:
+  secret: duong99
+  access-token-exp: 3600000
+  refresh-token-exp: 7200000
