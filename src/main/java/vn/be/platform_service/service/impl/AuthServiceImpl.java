@@ -9,13 +9,13 @@ import vn.be.platform_service.service.AuthService;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl {
 
-    private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
+//    private final UserRepository userRepository;
+//    private final JwtUtil jwtUtil;
 
-    @Override
-    public LoginResponse login(LoginRequest loginRequest) {
-        User user = userRepository
-    }
+//    @Override
+//    public LoginResponse login(LoginRequest loginRequest) {
+//        User user = userRepository
+//    }
 }

@@ -36,9 +36,4 @@ public class ProductController {
     public ApiResponse<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
        return  ApiResponse.success(productService.updateProduct(id, productDTO));
     }
-
-    // thêm api xóa mềm ( đồng nghĩa với việc e thêm 1 cột trong bảng product ) . mặc định thì em set các giá trị của cột đó là 1 ( active ) và em cần lấy ra tất cả sản phẩm có trạng thái active =1 (đối với api get ). khi mà xóa mềm thì em phải cập nhật lại giá trị cột đó là 0 ( inactive )
-
-    // viết api get by id
-
 }
