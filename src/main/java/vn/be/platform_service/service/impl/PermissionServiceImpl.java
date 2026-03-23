@@ -36,8 +36,6 @@ public class PermissionServiceImpl implements PermissionService {
     public PermissionDTO addPermission(PermissionDTO permissionDTO) {
         Instant now = Instant.now();
         Permission permission = permissionMapper.toEntity(permissionDTO);
-        permission.setCreatedAt(now);
-        permission.setUpdatedAt(now);
         Permission savedPermission = permissionRepository.save(permission);
         return permissionMapper.toDTO(savedPermission);
     }
@@ -57,9 +55,6 @@ public class PermissionServiceImpl implements PermissionService {
         if(permissionDTO.getDescription() != null){
             existingPermission.setDescription(permissionDTO.getDescription());
         }
-
-        existingPermission.setCreatedAt(now);
-        existingPermission.setUpdatedAt(now);
 
         Permission newPermission = permissionRepository.save(existingPermission);
         return permissionMapper.toDTO(newPermission);

@@ -17,9 +17,4 @@ public class MenuDTO {
     private String path;
     private String icon;
     private Long parentId;
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String updatedAt;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String createdAt;
 }

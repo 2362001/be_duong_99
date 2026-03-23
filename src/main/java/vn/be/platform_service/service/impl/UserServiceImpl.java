@@ -37,8 +37,6 @@ public class UserServiceImpl implements UserService {
     public UserDTO addUser(UserDTO userDTO) {
         Instant now = Instant.now();
         User user = userMapper.toEntity(userDTO);
-        user.setCreatedAt(now);
-        user.setUpdatedAt(now);
         User savedUser = userRepository.save(user);
         return userMapper.toDTO(savedUser);
     }
@@ -73,9 +71,6 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getName() != null) {
             existingUser.setName(userDTO.getName());
         }
-
-        existingUser.setCreatedAt(now);
-        existingUser.setUpdatedAt(now);
 
         User updatedUser = userRepository.save(existingUser);
 

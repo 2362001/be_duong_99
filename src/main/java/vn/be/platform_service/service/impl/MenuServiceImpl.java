@@ -29,8 +29,6 @@ public class MenuServiceImpl implements MenuService {
     public MenuDTO addMenu(MenuDTO menuDTO) {
         Instant now = Instant.now();
         Menu menu = menuMapper.toEntity(menuDTO);
-        menu.setCreatedAt(now);
-        menu.setUpdatedAt(now);
         Menu savedMenu = menuRepository.save(menu);
         return menuMapper.toDTO(savedMenu);
     }
@@ -61,9 +59,6 @@ public class MenuServiceImpl implements MenuService {
         if(menuDTO.getParentId() != null){
             existingMenu.setParentId(menuDTO.getParentId());
         }
-
-        existingMenu.setCreatedAt(now);
-        existingMenu.setUpdatedAt(now);
 
         Menu newMenu = menuRepository.save(existingMenu);
         return menuMapper.toDTO(newMenu);

@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -15,6 +17,7 @@ import java.time.Instant;
 @Table(name = "PERMISSIONS", schema = "DEMO")
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permissions_seq")
@@ -28,9 +31,9 @@ public class Permission {
     private String description;
 
     @Column(name = "CREATED_AT")
-    private Instant createdAt;
+    private Date createdAt;
 
     @Column(name = "UPDATED_AT")
-    private Instant updatedAt;
+    private Date updatedAt;
 
 }

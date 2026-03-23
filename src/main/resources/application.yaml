@@ -19,6 +19,6 @@ spring:
         format_sql: true
 
 jwt:
-  secret: duong99
+  secret: platform-service-super-secret-key-must-be-at-least-256-bits-long!
   access-token-exp: 3600000
   refresh-token-exp: 7200000

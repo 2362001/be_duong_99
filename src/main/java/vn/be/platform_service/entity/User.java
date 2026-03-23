@@ -3,14 +3,17 @@ package vn.be.platform_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "USERS", schema = "DEMO")
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
@@ -36,10 +39,10 @@ public class User {
     private Boolean enabled;
 
     @Column(name = "CREATED_AT")
-    private Instant createdAt;
+    private Date createdAt;
 
     @Column(name = "UPDATED_AT")
-    private Instant updatedAt;
+    private Date updatedAt;
 
     @Lob
     @Column(name = "ACCESS_TOKEN")

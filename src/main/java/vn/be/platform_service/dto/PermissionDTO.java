@@ -14,8 +14,4 @@ public class PermissionDTO {
     private Long id;
     private String name;
     private String description;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String updatedAt;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String createdAt;
 }

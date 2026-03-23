@@ -35,8 +35,6 @@ public class RoleServiceImpl implements RoleService {
     public RoleDTO addRole(RoleDTO roleDTO) {
         Instant now = Instant.now();
         Role role = roleMapper.toEntity(roleDTO);
-        role.setCreatedAt(now);
-        role.setUpdatedAt(now);
         Role saveRole = roleRepository.save(role);
         return roleMapper.toDTO(saveRole);
     }
@@ -56,9 +54,6 @@ public class RoleServiceImpl implements RoleService {
         if(roleDTO.getDescription() != null){
             existingRole.setDescription(roleDTO.getDescription());
         }
-
-        existingRole.setCreatedAt(now);
-        existingRole.setUpdatedAt(now);
 
         Role newRole = roleRepository.save(existingRole);
         return roleMapper.toDTO(newRole);

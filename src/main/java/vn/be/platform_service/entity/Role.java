@@ -3,8 +3,10 @@ package vn.be.platform_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.Date;
 
 
 @Data
@@ -12,6 +14,7 @@ import java.time.Instant;
 @Table(name = "ROLES", schema = "DEMO")
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roles_seq")
@@ -25,9 +28,9 @@ public class Role {
     private String description;
 
     @Column(name = "CREATED_AT")
-    private Instant createdAt;
+    private Date createdAt;
 
     @Column(name = "UPDATED_AT")
-    private Instant updatedAt;
+    private Date updatedAt;
 
 }

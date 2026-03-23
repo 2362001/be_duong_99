@@ -3,14 +3,19 @@ package vn.be.platform_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "MENUS", schema = "DEMO")
+@EntityListeners(AuditingEntityListener.class)
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_seq")
@@ -39,9 +44,11 @@ public class Menu {
     private Boolean visible;
 
     @Column(name = "CREATED_AT")
-    private Instant createdAt;
+    @CreatedDate
+    private Date createdAt;
 
+    @LastModifiedDate
     @Column(name = "UPDATED_AT")
-    private Instant updatedAt;
+    private Date updatedAt;
 
 }
