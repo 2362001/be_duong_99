@@ -27,7 +27,6 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuDTO addMenu(MenuDTO menuDTO) {
-        Instant now = Instant.now();
         Menu menu = menuMapper.toEntity(menuDTO);
         Menu savedMenu = menuRepository.save(menu);
         return menuMapper.toDTO(savedMenu);
@@ -42,7 +41,6 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public MenuDTO updateMenu(Long id, MenuDTO menuDTO) {
         Menu existingMenu = menuRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Instant now = Instant.now();
 
         if(menuDTO.getName() != null){
             existingMenu.setCode(menuDTO.getCode());

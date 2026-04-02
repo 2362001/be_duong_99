@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import vn.be.platform_service.dto.auth.LoginRequest;
 import vn.be.platform_service.dto.auth.LoginResponse;
+import vn.be.platform_service.dto.req.RegisterRequest;
+import vn.be.platform_service.dto.res.RegisterResponse;
 import vn.be.platform_service.entity.User;
+import vn.be.platform_service.mapper.UserMapper;
 import vn.be.platform_service.repositories.UserRepository;
 import vn.be.platform_service.service.AuthService;
 import vn.be.platform_service.utils.JwtUtil;
@@ -26,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private final RedisTemplate<String, Object> redisTemplate;
     private static final String USER_KEY_PREFIX = "user:";
     private static final Duration USER_SESSION_TTL = Duration.ofHours(1);
+    private final UserMapper userMapper;
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
@@ -57,6 +61,29 @@ public class AuthServiceImpl implements AuthService {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    @Override
+    public RegisterResponse register(RegisterRequest registerRequest) {
+        if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()) {
+            throw new RuntimeException("Username đã tồn tại: " + registerRequest.getUsername());
+        }
+
+        User user = userMapper.toEntityFromRegister(registerRequest);
+
+        user.setPassword(registerRequest.getPassword());
+        user.setEmail(registerRequest.getEmail());
+        user.setAge(registerRequest.getAge());
+        user.setFullName(registerRequest.getFullName());
+        user.setUsername(registerRequest.getUsername());
+
+        // Gán role USER mặc định — insert thủ công vào bảng user_roles
+//        Role userRole = roleRepository.findByName("USER")
+//                .orElseThrow(() -> new ResourceNotFoundException("Role USER không tồn tại"));
+//        jdbcTemplate.update("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)",
+//                savedUser.getId(), userRole.getId());
+       User userSaved = userRepository.save(user);
+       return userMapper.toDTOFromRegister(userSaved);
     }
 
     private void saveUserToRedis(User user, String accessToken) {

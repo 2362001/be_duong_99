@@ -33,7 +33,7 @@ public class User {
     private String fullName;
 
     @Column(name = "AGE")
-    private Short age;
+    private Integer age;
 
     @Column(name = "ENABLED")
     private Boolean enabled;
