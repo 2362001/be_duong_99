@@ -15,40 +15,28 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "MENUS", schema = "DEMO")
-@EntityListeners(AuditingEntityListener.class)
-public class Menu {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_seq")
-    @SequenceGenerator(name = "menu_seq", sequenceName = "menu_seq", allocationSize = 1)
-    private Long id;
+@SequenceGenerator(name = "seq_generator", sequenceName = "MENUS_SEQ", allocationSize = 1)
+public class Menu extends BaseEntity{
 
-    @Column(name = "NAME")
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "CODE")
+    @Column(nullable = false, unique = true, length = 100)
     private String code;
 
-    @Column(name = "PATH")
+    @Column(length = 255)
     private String path;
 
-    @Column(name = "ICON")
+    @Column(length = 50)
     private String icon;
 
-    @Column(name = "PARENT_ID")
+    @Column(name = "parent_id")
     private Long parentId;
 
-    @Column(name = "ORDER_INDEX")
-    private Integer orderIndex;
+    @Column(name = "order_index")
+    private Integer orderIndex = 0;
 
-    @Column(name = "VISIBLE")
-    private Boolean visible;
-
-    @Column(name = "CREATED_AT")
-    @CreatedDate
-    private Date createdAt;
-
-    @LastModifiedDate
-    @Column(name = "UPDATED_AT")
-    private Date updatedAt;
+    @Column(nullable = false)
+    private Boolean visible = true;
 
 }
